@@ -1,0 +1,91 @@
+$default-format: 'svg'
+$default-speed: 0.4s
+// $base-icon-url: '~/assets/icons/'
+$base-icon-url: '/icons/'
+
+
+
+//add hash objects to $i-cons to quickly make an icon class
+//properties:
+//  type: should the icon be masked or something else?
+//  icon: filename, option if hash name is same as filename
+//  alt-icon: alternate background if on hover, focused, or active
+//  color: background-color value of mask icons, changes the color of the icon
+//  alt-color: color changed to if on hover, focused, or active
+//  size: size defaults to 1rem, add this prop if different
+//  alt-scale: scale to this value if on hover, focused, or active
+//  interactable: does the icon react to user hover/click  
+
+
+$i-cons: {
+  'menu': (
+    type: 'mask',
+    color: $white,
+    alt-color: $green,
+    size: 1.7rem,
+  )
+}
+
+
+
+@each $icon, $prop in $i-cons
+  .i-#{$icon}
+    display: inline-block
+    vertical-align: middle
+
+    @if #{$prop}.type == 'default'
+      @if icon in #{$prop}
+        @include background($base-icon-url+$prop.icon+'.'+$default-format contain)
+      @else
+        @include background($base-icon-url+$icon+'.'+$default-format contain)
+    @else
+      @if icon in #{$prop}
+        @include mask($base-icon-url+$prop.icon+'.'+$default-format)
+      @else
+        @include mask($base-icon-url+$icon+'.'$default-format)
+      @if color in #{$prop}
+        background-color: $prop.color
+      @else
+        background-color: currentColor
+    
+    @if size in $prop
+      @if #{$prop}.size[1]
+        @include hw(#{$prop}.size[0] #{$prop}.size[1])
+        line-height: #{$prop}.size[0]
+      @else
+        @include hw(#{$prop}.size)
+        line-height: #{$prop}.size
+    
+    @if morph in $prop
+      transform: #{$prop}.morph
+
+    @if interactable in $prop
+      cursor: pointer
+      transition: transform $default-speed, background $default-speed
+      &:focus, &:active
+        background-color: $grey
+      &[disabled], .--disabled
+        cursor: not-allowed
+        transform: none
+        background-color: $text-light
+      @if alt-transform in $prop
+        &:hover, &:active, &.--active
+          transform: #{$prop}.alt-transform
+      @if alt-color in $prop
+        &:hover, &:active, &.--active
+          background-color: #{$prop}.alt-color
+      @if alt-icon in $prop
+        &:hover, &:active, &.--active
+          @include background($base-icon-url+#{$prop}.alt-icon+'.'+$default-format contain)
+    @else
+      @if alt-transform in $prop
+        &.--active
+          transform: #{$prop}.alt-transform
+      @if alt-color in $prop
+        &.--active
+          background-color: #{$prop}.alt-color
+      @if alt-icon in $prop
+        &.--active
+          @include background($base-icon-url+#{$prop}.alt-icon+'.'+$default-format contain)
+
+

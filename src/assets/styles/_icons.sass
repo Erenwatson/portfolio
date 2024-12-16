@@ -1,0 +1,95 @@
+@import '_colors'
+
+$default-format: 'svg'
+// $base-icon-url: '../../dist/icons/'
+$base-image-url: '/images/'
+$base-icon-url: '/assets/icons/'
+//::: list of small icons that are just small, non-interactable icons
+// $icons: image image mask, pdf pdf pdf mask, video video mask, audio audio mask, html html mask, team team-black mask, module module-black mask, content content-black mask, interactive interactive-black mask, quiz quiz mask, history history mask, search-blue search-blue mask
+$icons: menu audio xmark facebook github linkedin twitter download
+//::: list of small standard size icons that change color via mask and scale up to focus on hover
+//::: svg only, same filename and class
+$i-cons: i-menu i-audio i-xmark i-facebook i-github i-linkedin i-twitter i-download
+// $i-cons: i-edit, i-remove, i-close, i-module, i-team, i-user, i-course, i-quiz, i-content, i-interactive, i-star, i-wait, i-pdf, i-embededVideo, i-uploadedVideo, i-image, i-audio, i-trash, i-plus-black
+//::: list of icons that loads a different icon after set to active and scale up to focus on hover
+// $toggled-icons: ico-heart ico-heart-red, ico-list ico-grid, ico-az ico-za, ico-bookmark ico-bookmark-filled
+$toggled-icons: ico-menu ico-audio ico-xmark ico-facebook ico-github ico-linkedin ico-twitter ico-download
+//::: list of images used for thumbs that change color via mask, svg only, same filename and class
+// $thumbs: courseReports, moduleReports, teamReports, userReports, quizReports, contentReports, interactiveReports, accReports, formReports
+//::: mostly for background images or thumbs that don't change color, include filename if not svg, add size if not contain
+// $images: book, team, clipboard, fail 'failed.svg', pass, partial null (auto 88%), empty
+
+@each $class, $filename, $mask in $icons
+  $bg: $class
+  .ico-#{$class}
+    @if $filename
+      $bg: $filename
+    @if $mask
+      @include mask($image: $base-icon-url+$bg+'.'+$default-format)
+      background-color: $color-text-light
+    @else
+      @include background($base-icon-url+$bg+'.'+$default-format)
+    @include hw(2.5rem)
+    display: inline-block
+    cursor: default
+    @include mask($image: $base-icon-url+$bg+'.'+$default-format)
+    background: $offwhite
+  .thumb-#{$class}
+    @if $filename
+      $bg: $filename
+    @if $mask
+      @include mask($base-icon-url+$bg+'.'+$default-format, $color: $color-text-lighter, $size: auto 75%)
+    @else
+      @include background($base-icon-url+$bg+'.'+$default-format)
+
+@each $class, $filename in $i-cons
+  .i-#{$class}
+    @include mask($base-icon-url+$class+'.'+$default-format)
+    @include hw(1.48rem)
+    @include transition(transform 0.2s, background 0.2s)
+    display: inline-block
+    background-color: $color-text-light
+    cursor: pointer
+    &:hover, &.--active
+      transform: scale(1.2, 1.2)
+    &:focus, &:active
+      background-color: $color-accent
+    &[disabled], .--disable
+      cursor: not-allowed
+      transform: none
+      background-color: $color-text-lighter
+
+// @each $base-class, $active-class in $toggled-icons
+//   .#{$base-class}
+//     @include background($base-icon-url+$base-class+'.'+$default-format)
+//   .#{$active-class}
+//     @include background($base-icon-url+$active-class+'.'+$default-format)
+//   .#{$base-class}, .#{$active-class}
+//     @include hw(1.4rem)
+//     @include transition(transform 0.2s)
+//     display: inline-block
+//     cursor: pointer
+//     &:hover, &.--active
+//       transform: scale(1.2, 1.2)
+//     &:focus, &:active
+//       transform: none
+//     &[disabled], .--disable
+//       @include cursor(not-allowed)
+//       pointer-events: none
+//       transform: none
+//       opacity: 0.6
+
+// @each $class, $filename, $size in $images
+//   .img-#{$class}
+//     @if $filename
+//       @include background($base-image-url+$filename)
+//     @else
+//       @include background($base-image-url+$class+'.'+$default-format)
+//     @if $size
+//       background-size: $size
+
+// @each $class in $thumbs
+//   .thumb-#{$class}
+//     @include mask($base-image-url+$class+'.'+$default-format, $color: $color-text-lighter)
+//     &:hover, &:focus, &:active
+//       background-color: $color-accent-light

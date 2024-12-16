@@ -1,0 +1,53 @@
+@import '_variables'
+@import '_mixins'
+@import '_colors'
+
+html,
+body
+  min-width: $breakpoint-xxs
+  font-size: 16px
+  font-family: 'JetBrains-Mono', sans-serif
+  overflow: hidden !important
+  margin: 0
+  background-color: $black
+
+main
+  @include hw(100vw, 100vh)
+  color: inherit
+  background-color: inherit
+
+h1, h2, h3, h4, h5, p, span, div
+  margin: 0
+  color: $white
+  font-family: 'JetBrains-Mono', sans-serif
+h1
+  font-size: 3em
+h2
+  font-size: 2.75em
+h3
+  font-size: 1.6875rem
+  font-weight: 600
+h4
+  font-size: 1.2rem
+h5
+  font-size: 0.9rem
+
+ol, ul
+  list-style-type: none
+  padding: 0
+  margin: 0
+
+a
+  text-decoration: none
+  color: inherit
+  font-family: inherit
+  &:visited
+    inherit
+  button
+    display: inline-block
+
+img
+  object-fit: contain
+
+.hidden
+  display: none !important

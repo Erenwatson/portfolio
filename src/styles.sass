@@ -1,0 +1,21 @@
+// @import './assets/styles/._colors'
+@import '_colors'
+@import 'main'
+@import '_variables'
+@import '_mixins'
+@import '_icons'
+@import '_fonts'
+
+
+.container
+  margin: 0 auto
+  padding: 0 2rem
+  position: relative
+  @include hw(100%, auto)
+  @media screen and ( max-width: $breakpoint-xs )
+    padding: 0
+  @media screen and ( max-width: $breakpoint-lg )
+    max-width: $breakpoint-lg
+    
+
+

@@ -1,0 +1,177 @@
+@mixin hw($height, $width:$height)
+  height: $height
+  width: $width
+
+@mixin position($position, $top:false, $right:false, $bottom:false, $left:false)
+  position: $position
+  top: $top
+  right: $right
+  bottom: $bottom
+  left: $left
+
+@mixin flex($align: false, $justify: false, $direction: false, $gap: false, $wrap:false, $inline:false)
+    display: flex
+    flex-direction: $direction
+    justify-content: $justify
+    align-items: $align
+    flex-wrap: $wrap
+    gap: $gap
+
+@mixin line-limit($limit: 1)
+  overflow: hidden
+  display: -webkit-box
+  -webkit-line-clamp: $limit
+  -webkit-box-orient: vertical
+
+@mixin noselect()
+  -webkit-touch-callout: none /* iOS Safari */
+  -webkit-user-select: none /* Safari */
+  -khtml-user-select: none /* Konqueror HTML */
+  -moz-user-select: none /* Old versions of Firefox */
+  -ms-user-select: none /* Internet Explorer/Edge */
+  user-select: none /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+
+@mixin background($image: null, $repeat: no-repeat, $position: center, $size: contain, $origin: null, $color: null)
+    background-image: url($image)
+    background-repeat: $repeat
+    background-position: $position
+    background-size: $size
+    background-origin: $origin
+    background-color: $color
+
+@mixin mask($image:null, $repeat: no-repeat, $position: center, $size: contain, $origin: null, $color: null)
+  -webkit-mask: url($image)
+  mask: url($image)
+  -webkit-mask-size: $size
+  mask-size: $size
+  -webkit-mask-position: $position
+  mask-position: $position
+  -webkit-mask-repeat: $repeat
+  mask-repeat: $repeat
+  -webkit-backface-visibility: hidden
+  backface-visibility: hidden
+  background-color: $color
+
+@mixin transition($transition...)
+  -webkit-transition: $transition
+  -moz-transition: $transition
+  -ms-transition: $transition
+  -o-transition: $transition
+  transition: $transition
+
+@mixin cursor($cursor: null, $selectable: true)
+  cursor: $cursor !important
+  @if($selectable == false)
+    -webkit-touch-callout: none /* iOS Safari */
+    -webkit-user-select: none /* Safari */
+    -khtml-user-select: none /* Konqueror HTML */
+    -moz-user-select: none /* Firefox */
+    -ms-user-select: none /* Internet Explorer/Edge */
+    user-select: none /* Non-prefixed version, currently supported by Chrome and Opera */
+
+
+@mixin scrollbar ($type: 'grey', $sidescroll: hidden)
+  $scrollbar-width-wide: 16px
+  $scrollbar-width-thin: 6px
+  $scrollbar-rounding: 10px
+  $scrollbar-shadow: inset 0 0 6px rgba(0, 0, 0, .3)
+
+  overflow: $sidescroll auto
+
+  @if($type == 'dark')
+    scrollbar-width: auto
+    scrollbar-color: $color-darkbase $color-darkbase-off
+    &::-webkit-scrollbar
+      background-color: $color-darkbase-off
+      width: $scrollbar-width-wide
+
+    &::-webkit-scrollbar-thumb
+      border-radius: $scrollbar-rounding
+      -webkit-box-shadow: $scrollbar-shadow
+      box-shadow: $scrollbar-shadow
+      background-color: $color-darkbase
+
+    &::-webkit-scrollbar-track
+      border-radius: $scrollbar-rounding
+      -webkit-box-shadow: inset $scrollbar-shadow
+      box-shadow: $scrollbar-shadow
+      background-color: $color-sidebar-bg
+
+  @else if ($type == 'white')
+    margin-right: calc(#{$scrollbar-width-wide} * -1)
+    padding-right: $scrollbar-width-wide
+    scrollbar-width: auto
+    scrollbar-color: $color-base $color-base-off
+    &::-webkit-scrollbar
+      width: $scrollbar-width-wide
+      background-color: $color-base
+      border-radius: $scrollbar-rounding
+
+    &::-webkit-scrollbar-thumb
+      -webkit-box-shadow: $scrollbar-shadow
+      background-color: $color-base
+      border-radius: $scrollbar-rounding
+
+    &::-webkit-scrollbar-track
+      box-shadow: $scrollbar-shadow
+      &:hover
+        background-color: $color-accent-vlight
+
+
+  @else if ($type == 'grey')
+    scrollbar-width: thin
+    scrollbar-color: $grey $color-base
+    &::-webkit-scrollbar
+      width: $scrollbar-width-thin
+      height: $scrollbar-width-thin
+      background-color: $color-base
+      border-radius: $scrollbar-rounding
+
+    &::-webkit-scrollbar-thumb
+      border-radius: $scrollbar-rounding
+      -webkit-box-shadow: $scrollbar-shadow
+      background-color: lighten($grey, 25%)
+
+    &::-webkit-scrollbar-track
+      border-radius: $scrollbar-rounding
+      -webkit-box-shadow: $scrollbar-shadow
+      box-shadow: $scrollbar-shadow
+      background-color: $color-base
+
+
+  @else if ($type == 'invisible')
+    scrollbar-width: none
+    -ms-overflow-style: none
+    &::-webkit-scrollbar
+      display: none
+
+    &::-webkit-scrollbar-thumb
+      display: none
+
+    &::-webkit-scrollbar-track
+      display: none
+
+  @else if ($type == 'dark-thin')
+    padding-right: $scrollbar-width-thin
+    scrollbar-width: thin
+    scrollbar-color: $color-accent-dark $color-sidebar-accent
+    &::-webkit-scrollbar
+      width: $scrollbar-width-thin
+      height: $scrollbar-width-thin
+      background-color: $color-sidebar-accent
+      border-radius: $scrollbar-rounding
+
+    &::-webkit-scrollbar-thumb
+      border-radius: $scrollbar-rounding
+      -webkit-box-shadow: $scrollbar-shadow
+      box-shadow: $scrollbar-shadow
+      background-color: $color-accent-dark
+
+    &::-webkit-scrollbar-track
+      border-radius: $scrollbar-rounding
+      -webkit-box-shadow: $scrollbar-shadow
+      box-shadow: $scrollbar-shadow
+      background-color: $color-darkbase-off
+
+
+

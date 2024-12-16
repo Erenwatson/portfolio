@@ -1,0 +1,25 @@
+@import 'styles.sass'
+
+.home-section
+  border: 1px solid red
+  @include hw(auto, 100%)
+  @include flex(center, space-between, row, false)
+  padding: 3rem 0
+  .home-container
+    border: 1px solid red
+    background: green
+    max-width: 50%
+    width: 100%
+    @include flex(flex-starts, center, column)
+    padding: 2rem 0
+  .image-container
+    background-color: transparent
+    overflow: hidden
+    .image-border
+      background-color: transparent
+      border-radius: 50%
+      overflow: hidden
+      @inlclude hw(100%, 100%)
+      background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='100' ry='100' stroke='%2301FD9DFF' stroke-width='5' stroke-dasharray='24%2c 10' stroke-dashoffset='26' stroke-linecap='round'/%3e%3c/svg%3e")
+
+

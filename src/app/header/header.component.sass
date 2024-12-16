@@ -1,0 +1,122 @@
+@import 'styles.sass'
+
+.header-container
+  @include flex(center, space-between, row, 1rem)
+  padding: 0 1rem
+  height: 6rem
+  .__logo
+    @include flex(baseline, false, row, 0.2rem)
+    &::after
+      content: ''
+      @include hw(0.3rem, 0.3rem)
+      color: $green
+      border-radius: 50%
+      border: 1px solid $green
+      background-color: $green
+  .navbar-container
+    @include flex(center, false, row, 1rem, false)
+    .__navbar
+      font-size: 1.3rem
+      @include flex(false, false, false, 1.2rem)
+      & .__link
+          &:hover
+            transition: all ease-in 0.2s
+            color: $green
+            @include cursor(pointer, false)
+    .__button
+      background-color: $grey
+      @include hw(3rem, 10rem)
+      border-radius: 1.5rem
+      background-color: $green
+      font-size: 1.2rem
+      box-shadow: 0 0 transparent
+      white-space: pre-line
+      border: 0
+      &:hover
+        transition: all ease-in 0.2s
+        color: $offwhite
+        @include cursor(pointer, false)
+        transform: scale(1.05)
+  .--burgered
+    position: relative
+    display: none
+    .__backdrop
+      opacity: 0.4
+      position: fixed
+      top: 0
+      right: 0
+      bottom: 0
+      left: 0
+      z-index: 10
+      background-color: rgba($black, 0.9)
+      backdrop-filter: blur(1.5rem)
+    .burger-menu
+      @include hw(100%, 15rem)
+      position: fixed
+      top: 0
+      bottom: 0
+      right: 0
+      z-index: 11
+      background-color: $black
+      padding-top: 1rem
+      @include flex(false, false, column, 1rem)
+      box-shadow: $box-shadow-def
+      .__icon 
+        @include flex(false, flex-end)
+        & .ico-xmark
+            padding: 0.2rem
+            margin: 0.2rem
+            &:hover
+              background: $green
+              cursor: pointer
+              transition: all ease-in 0.2s
+      .__logo
+        @include flex(center, center)
+        padding: 3rem
+      .__menu
+        ul
+          .__link
+            font-size: 1.2rem
+            padding: 0.8rem 0
+            @include flex(center, center, row)
+            &:hover
+              transition: all ease-in 0.2s
+              color: $green
+              @include cursor(pointer, false)
+
+    & .ico-menu
+        &:hover
+          background: $green
+          cursor: pointer
+          transition: all ease-in 0.2s
+          
+@media (width <= $breakpoint-mobile-sm)
+  .header-container
+    height: 3rem
+    width: 65%
+    padding: 0.5rem
+    .__logo
+      padding-left: 0.5rem
+      h2
+        font-size: 2rem
+
+@media (321px <= width <= $breakpoint-mobile-md)
+  .header-container
+    width: 75%
+    padding: 0.5rem
+    height: 5rem
+    .__logo
+      padding-left: 0.5rem
+      h2
+        font-size: 2rem
+
+@media (376px <= width <= $breakpoint-mobile-lg)
+  .header-container
+    width: 83%
+
+@media (width <= $breakpoint-xs)
+  .header-container
+    .navbar-container
+      display: none !important
+    .--burgered
+      display: block !important
